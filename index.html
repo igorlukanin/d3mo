@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Marvelous Visualizations with D3.js</title>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="node_modules/shower-ribbon/styles/screen-16x10.css">
+</head>
+<body class="shower list">
+
+<header class="caption">
+    <h1>Marvelous Visualizations with D3.js</h1>
+
+    <p>A talk by <a href="http://igor.lukanin.name" target="_blank">Igor Lukanin</a> at <a href="https://twitter.com/frontendfellows" target="_blank">FrontendFellows</a> #4</p>
+    <p>Yekaterinburg &middot; April 29, 2016</p>
+
+    <style scoped>
+        .caption {
+            color: #eee;
+            text-shadow: none;
+        }
+        .caption h1 {
+            margin-bottom: .25em;
+        }
+        .caption p {
+            line-height: 1.5em;
+        }
+        .caption a {
+            border-bottom: solid 2px #ccc;
+            color: inherit;
+        }
+
+        .shout:after {
+            opacity: 0;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+        }
+
+        .slide.iframe, .slide.svg  {
+            padding: 0 !important;
+        }
+
+        .slide.code {
+            padding-top: 0 !important;
+        }
+
+        .slide.shout {
+            text-align: center;
+        }
+
+        .slide.shout.major {
+            background-color: #fafaa2;
+            text-shadow: 0 0 .25em #999;
+        }
+
+        h2.shout i {
+            color: #999;
+            font-size: 0.8em;
+        }
+
+        h2.shout .small {
+            color: #777;
+            font-size: 0.8em;
+        }
+    </style>
+</header>
+
+<section class="slide shout svg">
+    <svg width="96" height="91">
+        <symbol id="d3-logo">
+            <clipPath id="clip">
+                <path d="M0,0h7.75a45.5,45.5 0 1 1 0,91h-7.75v-20h7.75a25.5,25.5 0 1 0 0,-51h-7.75zm36.2510,0h32a27.75,27.75 0 0 1 21.331,45.5a27.75,27.75 0 0 1 -21.331,45.5h-32a53.6895,53.6895 0 0 0 18.7464,-20h13.2526a7.75,7.75 0 1 0 0,-15.5h-7.75a53.6895,53.6895 0 0 0 0,-20h7.75a7.75,7.75 0 1 0 0,-15.5h-13.2526a53.6895,53.6895 0 0 0 -18.7464,-20z"></path>
+            </clipPath>
+            <linearGradient id="gradient-1" gradientUnits="userSpaceOnUse" x1="7" y1="64" x2="50" y2="107">
+                <stop offset="0" stop-color="#f9a03c"></stop>
+                <stop offset="1" stop-color="#f7974e"></stop>
+            </linearGradient>
+            <linearGradient id="gradient-2" gradientUnits="userSpaceOnUse" x1="2" y1="-2" x2="87" y2="84">
+                <stop offset="0" stop-color="#f26d58"></stop>
+                <stop offset="1" stop-color="#f9a03c"></stop>
+            </linearGradient>
+            <linearGradient id="gradient-3" gradientUnits="userSpaceOnUse" x1="45" y1="-10" x2="108" y2="53">
+                <stop offset="0" stop-color="#b84e51"></stop>
+                <stop offset="1" stop-color="#f68e48"></stop>
+            </linearGradient>
+            <g clip-path="url(#clip)">
+                <path d="M-100,-102m-27,0v300h300z" fill="url(#gradient-1)"></path>
+                <path d="M-100,-102m27,0h300v300z" fill="url(#gradient-3)"></path>
+                <path d="M-100,-102l300,300" fill="none" stroke="url(#gradient-2)" stroke-width="40"></path>
+            </g>
+        </symbol>
+    </svg>
+    <svg width="100%" height="500" viewBox="0 0 100 100">
+        <use xlink:href="#d3-logo"/>
+    </svg>
+</section>
+
+<section class="slide shout">
+    <h2 class="shout">Data-Driven<br/>Documents</h2>
+</section>
+
+<section class="slide code">
+    <pre><code>
+&lt;body&gt;
+    <mark>&lt;div class="dot"&gt;&lt;/div&gt;</mark>
+&lt;/body&gt;
+    </code></pre>
+</section>
+
+<section class="slide shout iframe">
+    <iframe src="examples/00.html"></iframe>
+</section>
+
+<section class="slide code">
+    <pre><code>
+const createDot = () =>
+        ({ x: Math.random(), y: Math.random() });
+
+const dot = createDot();
+
+d3.select('body')
+        <mark>.append('div')</mark>
+        <mark>.attr('class', 'dot')</mark>
+        <mark>.style('left', 100 * dot.x + '%')</mark>
+        <mark>.style('top',  100 * dot.y + '%');</mark>
+    </code></pre>
+</section>
+
+<section class="slide shout iframe">
+    <iframe src="examples/01.html" data-refresh="3"></iframe>
+</section>
+
+<section class="slide code">
+    <pre><code>
+const dots = [
+    createDot(),
+    createDot()
+];
+
+<mark>dots.forEach(dot => {</mark>
+    <span class="comment">// Drawing with D3...</span>
+<mark>});</mark>
+    </code></pre>
+</section>
+
+<section class="slide shout iframe">
+    <iframe src="examples/02.html" data-refresh="3"></iframe>
+</section>
+
+<section class="slide shout">
+    <h2 class="shout">— Noooooooo!<br><i>Luke S.</i></h2>
+</section>
+
+<section class="slide shout">
+    <img src="images/ie.gif"/>
+</section>
+
+<section class="slide code">
+    <pre><code>
+d3.select('body')
+        <mark>.selectAll('div')</mark> <span class="comment">// Elements</span>
+        <mark>.data(dots)</mark>       <span class="comment">// Data</span>
+        <mark>.enter()</mark>          <span class="comment">// Selection</span>
+        .append('div')
+        .attr('class', 'dot')
+        .style('left', <mark>dot => 100 * dot.x + '%'</mark>)
+        .style('top',  <mark>dot => 100 * dot.y + '%'</mark>);
+    </code></pre>
+</section>
+
+<section class="slide shout svg">
+    <svg width="1280" height="720">
+        <text x="125" y="100" text-anchor="middle" style="font-size: 60px; fill: rgb(71, 136, 240);">Data</text>
+        <text x="850" y="100" text-anchor="middle" style="font-size: 60px; fill: rgb(229, 88, 84);">Elements</text>
+        <g transform="translate(0,350)">
+            <circle cx='350' r="225" style="fill: rgba(71, 136, 240, 0.75); stroke: rgb(71, 136, 240); stroke-width: 5px;"></circle>
+            <circle cx='575' r="225" style="fill: rgba(229, 88, 84, 0.75); stroke: rgb(229, 88, 84); stroke-width: 5px;"></circle>
+            <g transform="translate(300)">
+                <text dy=".5em" dx="-60" text-anchor="middle" style="font-size: 50px; fill: #fff;">Enter</text>
+                <text dy=".5em" dx="165" text-anchor="middle" style="font-size: 50px; fill: #fff;">Update</text>
+                <text dy=".5em" dx="380" text-anchor="middle" style="font-size: 50px; fill: #fff;">Exit</text>
+            </g>
+        </g>
+    </svg>
+</section>
+
+<section class="slide shout iframe">
+    <iframe src="examples/03.html" data-refresh="3"></iframe>
+</section>
+
+<section class="slide shout">
+    <h2 class="shout">One, two...<br/>Oops!</h2>
+</section>
+
+<section class="slide code">
+    <pre><code>
+var selection = d3.select('body')
+        .selectAll('div') <span class="comment">// Elements</span>
+        .data(dots);      <span class="comment">// Data</span>
+
+<mark>selection.enter()</mark>              <span class="comment">// For each new dot...</span>
+        .append('div')
+        .attr('class', 'dot <mark>dot__enter</mark>')
+        .style('left', dot => 100 * dot.x + '%')
+        .style('top',  dot => 100 * dot.y + '%');
+    </code></pre>
+</section>
+
+<section class="slide shout iframe">
+    <iframe src="examples/04.html" data-refresh="3"></iframe>
+</section>
+
+<section class="slide code">
+    <pre><code>
+&lt;body&gt;&lt;/body&gt;
+
+var dots = [
+    { x: 0.5, y: 0.5 },
+    createDot(),
+    createDot()
+];
+
+<span class="comment">// Drawing with D3...</span>
+    </code></pre>
+</section>
+
+<section class="slide shout">
+    <h2 class="shout">Red or green?</h2>
+</section>
+
+<section class="slide shout iframe">
+    <iframe src="examples/05.html" data-refresh="3"></iframe>
+</section>
+
+<div class="progress">
+    <div></div>
+</div>
+
+<section class="slide code">
+    <pre><code>
+const draw = dots => {
+    <span class="comment">// Drawing with D3...</span>
+};
+
+draw(dots);
+
+setInterval(() => {
+    <mark>dots.push(createDot());</mark>
+    <mark>draw(dots);</mark>
+}, 1000);
+    </code></pre>
+</section>
+
+<section class="slide shout iframe">
+    <iframe src="examples/06.html"></iframe>
+</section>
+
+<section class="slide code">
+    <pre><code>
+<mark>var i = 1,</mark>
+    createDot = () => ({ <span class="comment">/* x, y... */ </span> <mark>i: i++</mark> }},
+    dots =            [{ <span class="comment">/* x, y... */ </span> <mark>i: 0</mark> }, <span class="comment">/* ... */</span>];
+
+const draw = dots => { <span class="comment">// Data × Elements...</span>
+    selection.enter()
+            .append('div') <span class="comment">// class, left/top...</span>
+            <mark>.text(dot => dot.i);</mark>
+};
+    </code></pre>
+</section>
+
+<section class="slide shout iframe">
+    <iframe src="examples/07.html" data-refresh="10"></iframe>
+</section>
+
+<section class="slide code">
+    <pre><code>
+setInterval(() => {
+    <mark>if (i <= 10) {</mark>
+        <mark>dots.push(createDot());</mark>
+    }
+    <mark>else {</mark>
+        var index = Math.floor(Math.random() * dots.length);
+        <mark>dots.splice(index, 1);</mark>
+    }
+
+    draw(dots);
+}, 1000);
+    </code></pre>
+</section>
+
+<section class="slide shout iframe">
+    <iframe src="examples/08.html" data-refresh="20"></iframe>
+</section>
+
+<section class="slide code">
+    <pre><code>
+const draw = dots => {
+    <span class="comment">// Data × Elements...</span>
+    <span class="comment">// selection.enter()</span>
+
+    <mark>selection.exit()</mark>
+            <mark>.remove();</mark>
+};
+    </code></pre>
+</section>
+
+<section class="slide shout iframe">
+    <iframe src="examples/09.html" data-refresh="20"></iframe>
+</section>
+
+<section class="slide code">
+    <pre><code>
+setInterval(() => {
+    if (i <= 10) {
+        dots.push(createDot());
+    }
+    else {
+        <mark>var index = Math.floor(Math.random() * dots.length);</mark>
+        <mark>dots.splice(index, 1);</mark>
+    }
+
+    draw(dots);
+}, 1000);
+    </code></pre>
+</section>
+
+<section class="slide shout">
+    <h2 class="shout">Random?</h2>
+</section>
+
+<section class="slide code">
+    <pre><code>
+const draw = dots => {
+    const selection = d3.select('body')
+            .selectAll('div')
+            .data(dots, <mark>dot => dot.i</mark>);
+
+    <span class="comment">// selection.enter()</span>
+    <span class="comment">// selection.exit()</span>
+};
+    </code></pre>
+</section>
+
+<section class="slide shout iframe">
+    <iframe src="examples/10.html" data-refresh="20"></iframe>
+</section>
+
+<section class="slide code">
+    <pre><code>
+const draw = dots => {
+    const selection = <span class="comment">// Data × Elements...</span>
+            <mark>.attr('class', 'dot');</mark>
+
+    selection.enter() <span class="comment">// ...</span>
+            <mark>.attr('class', 'dot dot__enter');</mark>
+
+    selection.exit()
+            <mark>.attr('class', 'dot dot__exit');</mark>
+};
+    </code></pre>
+</section>
+
+<section class="slide shout iframe">
+    <iframe src="examples/11.html" data-refresh="20"></iframe>
+</section>
+
+<section class="slide shout major">
+    <h2 class="shout">Data × Elements<br/><span class="small">Enter, update, exit</span></h2>
+</section>
+
+<section class="slide shout major">
+    <h2 class="shout">Transitions<br/><span class="small">& Interpolations</span></h2>
+</section>
+
+<section class="slide code">
+    <pre><code>
+selection.enter() <span class="comment">// ...</span>
+        <mark>.style('left', dot => 100 * dot.x + '%')</mark>
+        <mark>.style('top',  dot => -100)</mark>
+        <mark class="important">.transition().duration(3000)</mark>
+        <mark>.style('top',  dot => 100 * dot.y + '%');</mark>
+
+selection.exit() <span class="comment">// ...</span>
+        <mark class="important">.transition().duration(2000).ease('bounce')</mark>
+        <mark>.style('top', '95%');</mark>
+    </code></pre>
+</section>
+
+<section class="slide shout iframe">
+    <iframe src="examples/12.html" data-refresh="20"></iframe>
+</section>
+
+<section class="slide shout">
+    <h2 class="shout">Moar!</h2>
+</section>
+
+<section class="slide shout iframe">
+    <iframe src="examples/13.html" data-refresh="30"></iframe>
+</section>
+
+<section class="slide">
+    <h2>Interpolations</h2>
+    <ul>
+        <li>numbers</li>
+        <li>strings <pre><code><span class="comment">// 300 12px sans-serif -> 500 36px Comic-Sans</span></code></pre></li>
+        <li>colors <pre><code><span class="comment">// rgb(123, 234, 44) -> hsl(120, 50%, 20%)</span></code></pre></li>
+        <li>arrays, objects</li>
+        <li>transform, zoom</li>
+    </ul>
+</section>
+
+<section class="slide shout major">
+    <h2 class="shout">SVG<br/><span class="small">as good as HTML</span></h2>
+</section>
+
+<script src="node_modules/shower-core/shower.min.js"></script>
+
+<script>
+    (function() {
+        Array.prototype.slice.call(document.getElementsByTagName('iframe')).forEach(function(iframe) {
+            var seconds = iframe.dataset.refresh;
+
+            if (seconds != undefined) {
+                setInterval(function() {
+                    iframe.src = iframe.src;
+                }, seconds * 1000);
+            }
+        });
+    })();
+</script>
+
+</body>
+</html>

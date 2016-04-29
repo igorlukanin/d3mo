@@ -1,0 +1,25 @@
+.dot {
+    position: absolute;
+    background: #f66;
+    border: solid 10px #fff;
+    border-radius: 60px;
+    width: 100px;
+    height: 100px;
+    margin: -50px 0 0 -50px;
+
+    top: 50%;
+    left: 50%;
+
+    color: #fff;
+    font: bold 65px Helvetica, sans-serif;
+    line-height: 100px;
+    text-align: center;
+}
+
+.dot__enter {
+    background: #6d6;
+}
+
+.dot__exit {
+    background: #999;
+}

@@ -1,0 +1,36 @@
+<script src="../node_modules/d3/d3.min.js"></script>
+<link rel="stylesheet" href="style.css"/>
+
+<body></body>
+
+<script>
+    var createDot = function() { return {
+        x: Math.random(),
+        y: Math.random()
+    }};
+
+    var dots = [
+        { x: 0.5, y: 0.5 },
+        createDot(),
+        createDot()
+    ];
+
+    var draw = function(dots) {
+        var selection = d3.select('body')
+                .selectAll('div')
+                .data(dots);
+
+        selection.enter()
+                .append('div')
+                .attr('class', 'dot dot__enter')
+                .style('left', function(dot) { return 100 * dot.x + '%'; })
+                .style('top',  function(dot) { return 100 * dot.y + '%'; });
+    };
+
+    draw(dots);
+
+    setInterval(function() {
+        dots.push(createDot());
+        draw(dots);
+    }, 1000);
+</script>

@@ -1,0 +1,45 @@
+<script src="../node_modules/d3/d3.min.js"></script>
+<link rel="stylesheet" href="style.css"/>
+
+<body>
+    <svg width="1000" height="1000">
+        <g transform="translate(100, 100)">
+            <line
+                    x1="500"
+                    y1="-50"
+                    x2="900"
+                    y2="300"
+                    stroke="gray"
+                    stroke-width="10" />
+
+            <rect
+                    x="450"
+                    y="50"
+                    width="350"
+                    height="450"
+                    stroke-width="0"
+                    fill="yellow" />
+
+            <circle
+                    cx="550"
+                    cy="550"
+                    r="200"
+                    stroke="green"
+                    stroke-width="10"
+                    fill="none" />
+
+            <polyline
+                    points="50,300 150,300 150,200 250,200 250,100 350,100"
+                    fill="none"
+                    stroke="blue"
+                    stroke-width="10" />
+
+            <path
+                    d="M 100,250 L 100,700 L 700,550 L 100,250"
+                    stroke="red"
+                    stroke-width="5"
+                    fill="#f99"
+                    style="opacity: 0.5" />
+        </g>
+    </svg>
+</body>

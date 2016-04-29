@@ -1,0 +1,26 @@
+<script src="../node_modules/d3/d3.min.js"></script>
+<link rel="stylesheet" href="style.css"/>
+
+<body>
+    <div class="dot"></div>
+</body>
+
+<script>
+    var createDot = function() { return {
+        x: Math.random(),
+        y: Math.random()
+    }};
+
+    var dots = [
+        createDot(),
+        createDot()
+    ];
+
+    dots.forEach(function(dot) {
+        d3.select('body')
+                .append('div')
+                .attr('class', 'dot')
+                .style('left', 100 * dot.x + '%')
+                .style('top',  100 * dot.y + '%');
+    });
+</script>
