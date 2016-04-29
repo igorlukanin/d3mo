@@ -26,7 +26,7 @@
 
         selection.enter()
                 .append('div')
-                .attr('class', 'dot dot__enter')
+                .attr('class', 'dot dot_entered')
                 .style('left', function(dot) { return 100 * dot.x + '%'; })
                 .style('top',  function(dot) { return -100; })
                 .transition()
@@ -35,7 +35,7 @@
                 .text(function(dot) { return dot.i; });
 
         selection.exit()
-                .attr('class', 'dot dot__exit')
+                .attr('class', 'dot dot_exited')
                 .transition()
                 .duration(2000)
                 .ease('bounce')

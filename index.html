@@ -66,6 +66,15 @@
             color: #777;
             font-size: 0.8em;
         }
+
+        .slide li pre {
+            display: inline;
+            margin-bottom: 0 !important;
+        }
+
+        .slide li pre code {
+            display: inline;
+        }
     </style>
 </header>
 
@@ -198,13 +207,13 @@ d3.select('body')
 
 <section class="slide code">
     <pre><code>
-var selection = d3.select('body')
+const selection = d3.select('body')
         .selectAll('div') <span class="comment">// Elements</span>
         .data(dots);      <span class="comment">// Data</span>
 
-<mark>selection.enter()</mark>              <span class="comment">// For each new dot...</span>
+<mark>selection.enter()</mark>         <span class="comment">// For each new dot...</span>
         .append('div')
-        .attr('class', 'dot <mark>dot__enter</mark>')
+        .attr('class', 'dot <mark>dot_entered</mark>')
         .style('left', dot => 100 * dot.x + '%')
         .style('top',  dot => 100 * dot.y + '%');
     </code></pre>
@@ -218,7 +227,7 @@ var selection = d3.select('body')
     <pre><code>
 &lt;body&gt;&lt;/body&gt;
 
-var dots = [
+const dots = [
     { x: 0.5, y: 0.5 },
     createDot(),
     createDot()
@@ -261,13 +270,14 @@ setInterval(() => {
 
 <section class="slide code">
     <pre><code>
-<mark>var i = 1,</mark>
-    createDot = () => ({ <span class="comment">/* x, y... */ </span> <mark>i: i++</mark> }},
-    dots =            [{ <span class="comment">/* x, y... */ </span> <mark>i: 0</mark> }, <span class="comment">/* ... */</span>];
+<mark>var i = 1;</mark>
+const createDot = () => ({ <span class="comment">/* x, y... */ </span> <mark>i: i++</mark> }};
+const dots =            [{ <span class="comment">/* x, y... */ </span> <mark>i: 0</mark> }, <span class="comment">/* ... */</span>];
 
-const draw = dots => { <span class="comment">// Data × Elements...</span>
-    selection.enter()
-            .append('div') <span class="comment">// class, left/top...</span>
+const draw = dots => { <span class="comment">
+    // Data × Elements...</span>
+
+    selection.enter() <span class="comment">// ...</span>
             <mark>.text(dot => dot.i);</mark>
 };
     </code></pre>
@@ -284,7 +294,7 @@ setInterval(() => {
         <mark>dots.push(createDot());</mark>
     }
     <mark>else {</mark>
-        var index = Math.floor(Math.random() * dots.length);
+        const index = Math.floor(Math.random() * dots.length);
         <mark>dots.splice(index, 1);</mark>
     }
 
@@ -320,7 +330,7 @@ setInterval(() => {
         dots.push(createDot());
     }
     else {
-        <mark>var index = Math.floor(Math.random() * dots.length);</mark>
+        <mark>const index = Math.floor(Math.random() * dots.length);</mark>
         <mark>dots.splice(index, 1);</mark>
     }
 
@@ -357,10 +367,10 @@ const draw = dots => {
             <mark>.attr('class', 'dot');</mark>
 
     selection.enter() <span class="comment">// ...</span>
-            <mark>.attr('class', 'dot dot__enter');</mark>
+            <mark>.attr('class', 'dot dot_entered');</mark>
 
     selection.exit()
-            <mark>.attr('class', 'dot dot__exit');</mark>
+            <mark>.attr('class', 'dot dot_exited');</mark>
 };
     </code></pre>
 </section>
@@ -380,14 +390,14 @@ const draw = dots => {
 <section class="slide code">
     <pre><code>
 selection.enter() <span class="comment">// ...</span>
-        <mark>.style('left', dot => 100 * dot.x + '%')</mark>
-        <mark>.style('top',  dot => -100)</mark>
-        <mark class="important">.transition().duration(3000)</mark>
-        <mark>.style('top',  dot => 100 * dot.y + '%');</mark>
+        .style('left', dot => 100 * dot.x + '%')
+        .style('top',  dot => -100)
+        <mark>.transition().duration(3000)</mark>
+        .style('top',  dot => 100 * dot.y + '%');
 
 selection.exit() <span class="comment">// ...</span>
-        <mark class="important">.transition().duration(2000).ease('bounce')</mark>
-        <mark>.style('top', '95%');</mark>
+        <mark>.transition().duration(2000).ease('bounce')</mark>
+        .style('top', '95%');
     </code></pre>
 </section>
 
@@ -404,18 +414,49 @@ selection.exit() <span class="comment">// ...</span>
 </section>
 
 <section class="slide">
-    <h2>Interpolations</h2>
+    <h2>Interpolations for Transitions</h2>
     <ul>
         <li>numbers</li>
-        <li>strings <pre><code><span class="comment">// 300 12px sans-serif -> 500 36px Comic-Sans</span></code></pre></li>
-        <li>colors <pre><code><span class="comment">// rgb(123, 234, 44) -> hsl(120, 50%, 20%)</span></code></pre></li>
+        <li>strings <pre><code><span class="comment"> // 300 12px sans-serif -> 500 36px Comic-Sans</span></code></pre></li>
+        <li>colors<pre><code><span class="comment">  // rgb(123, 234, 44) -> hsl(120, 50%, 20%)</span></code></pre></li>
         <li>arrays, objects</li>
         <li>transform, zoom</li>
     </ul>
 </section>
 
 <section class="slide shout major">
-    <h2 class="shout">SVG<br/><span class="small">as good as HTML</span></h2>
+    <h2 class="shout">SVG<br/><span class="small"> is XHTML too</span></h2>
+</section>
+
+<section class="slide">
+    <h2>Primitives</h2>
+    <ul>
+        <li><pre><code>&lt;rect x="0" y="0" width="800" height="500" /&gt;</code></pre></li>
+        <li><pre><code>&lt;circle cx="250" cy="250" r="200" /&gt;</code></pre></li>
+        <li><pre><code>&lt;ellipse cx="625" cy="250" rx="125" ry="200" /&gt;</code></pre></li>
+        <li><pre><code>&lt;line x1="0" y1="0" x2="400" y2="500" /&gt;</code></pre></li>
+        <li><pre><code>&lt;polyline points="0,500 400,0, 100,500 500,0" /&gt;</code></pre></li>
+        <li><pre><code>&lt;path d="<mark>M 800,0 L 500,500 L 800,500 L 350,250 Z</mark>" /&gt;</code></pre></li>
+        <br/>
+        <li><pre><code>&lt;g transform="translate(100, 50)"&gt; ... &lt/g&gt;</code></pre></li>
+    </ul>
+</section>
+
+<section class="slide shout iframe">
+    <iframe src="examples/14.html" data-refresh="30"></iframe>
+</section>
+
+<section class="slide">
+    <h2>Path Data Generators</h2>
+    <ul>
+        <li><a href="https://www.dashingd3js.com/svg-paths-and-d3js" target="_blank">SVG Path Mini-Language</a>: M, L, H, V, C, S, Q, T, A, Z</li>
+        <li>There's a D3.js helper for everything</li>
+        <li>Built-in interpolations</li>
+    </ul>
+
+        <pre><code>svg.append('path').attr('d', <span class="comment">/* ... */ </>)</code></pre>
+        <pre><code>d3.svg.line().x(d => d.x).y(d => d.y)<mark>.interpolate('basis')</mark></code></pre>
+        <pre><code>d3.svg.area().x(d => d.x).y0(d => d.y).y1(d => d.y + 10)</code></pre>
 </section>
 
 <script src="node_modules/shower-core/shower.min.js"></script>

@@ -16,10 +16,10 @@
     text-align: center;
 }
 
-.dot__enter {
+.dot_entered {
     background: #6d6;
 }
 
-.dot__exit {
+.dot_exited {
     background: #999;
 }
