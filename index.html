@@ -31,7 +31,7 @@
             color: inherit;
         }
 
-        .shout:after {
+        .shout:after, .cover:after {
             opacity: 0;
         }
 
@@ -245,10 +245,6 @@ const dots = [
     <iframe src="examples/05.html" data-refresh="3"></iframe>
 </section>
 
-<div class="progress">
-    <div></div>
-</div>
-
 <section class="slide code">
     <pre><code>
 const draw = dots => {
@@ -437,8 +433,8 @@ selection.exit() <span class="comment">// ...</span>
         <li><pre><code>&lt;line x1="0" y1="0" x2="400" y2="500" /&gt;</code></pre></li>
         <li><pre><code>&lt;polyline points="0,500 400,0, 100,500 500,0" /&gt;</code></pre></li>
         <li><pre><code>&lt;path d="<mark>M 800,0 L 500,500 L 800,500 L 350,250 Z</mark>" /&gt;</code></pre></li>
-        <br/>
         <li><pre><code>&lt;g transform="translate(100, 50)"&gt; ... &lt/g&gt;</code></pre></li>
+        <li><pre><code>&lt;text x="0" y="0"&gt;Hello, SVG!&lt/text&gt;</code></pre></li>
     </ul>
 </section>
 
@@ -458,6 +454,92 @@ selection.exit() <span class="comment">// ...</span>
         <pre><code>d3.svg.line().x(d => d.x).y(d => d.y)<mark>.interpolate('basis')</mark></code></pre>
         <pre><code>d3.svg.area().x(d => d.x).y0(d => d.y).y1(d => d.y + 10)</code></pre>
 </section>
+
+<section class="slide shout">
+    <h2 class="shout">D3.js is...</h2>
+</section>
+
+<section class="slide">
+    <h2>D3.js</h2>
+    <table><tr>
+        <td>
+            <ul>
+                <li>Data × Elements</li>
+                <li>Transitions</li>
+                <li>SVG</li>
+            </ul>
+        </td>
+        <td>
+            <ul>
+                <li>scales</li>
+                <li>axes</li>
+                <li>geo</li>
+                <li>layouts</li>
+                <li>statistics</li>
+                <li>events</li>
+                <li>CSV, TSV</li>
+            </ul>
+        </td>
+    </tr></table>
+</section>
+
+<section class="slide shout">
+    <h2 class="shout">Marvelous<br/>Visualizations</h2>
+</section>
+
+<section class="slide cover">
+    <a href="https://github.com/igorlukanin" target="_blank"><img src="images/github.png" class="cover"/></a>
+</section>
+
+<section class="slide cover">
+    <a href="http://www.theguardian.com/world/interactive/2013/feb/12/state-of-the-union-reading-level" target="_blank"><img src="images/state.png" class="cover"/></a>
+</section>
+
+<section class="slide cover">
+    <a href="http://www.nytimes.com/interactive/2012/08/11/sunday-review/drought-history.html?_r=2&" target="_blank"><img src="images/drought.png" class="cover"/></a>
+</section>
+
+<section class="slide cover" style="background: rgb(252, 252, 250);">
+    <a href="https://bost.ocks.org/mike/path/" target="_blank"><img src="images/transition.png" class="cover"/></a>
+</section>
+
+<section class="slide cover">
+    <a href="http://minibus.datalaboratory.ru/onebyone/" target="_blank"><img src="images/buses.png" class="cover"/></a>
+</section>
+
+<section class="slide cover">
+    <a href="http://pdd.datalaboratory.ru" target="_blank"><img src="images/pdd.png" class="cover"/></a>
+</section>
+
+<section class="slide cover">
+    <a href="http://moscowmarathon.datalaboratory.ru" target="_blank"><img src="images/marathon.png" class="cover"/></a>
+</section>
+
+<section class="slide">
+    <h2>Links</h2>
+    <ul>
+        <li><a href="https://d3js.org" target="_blank">d3js.org</a> </li>
+        <li><a href="https://github.com/mbostock/d3/wiki/Gallery" target="_blank">D3.js Examples</a> </li>
+        <li><a href="http://bl.ocks.org/mbostock" target="_blank">Mike Bostock’s Blocks</a> </li>
+        <li><a href="http://datalaboratory.ru" target="_blank">datalaboratory.ru</a></li>
+    </ul>
+</section>
+
+<section class="slide shout" style="background: linear-gradient(to bottom, #000, #666);">
+    <h2 class="shout" style="font: normal 80px Helvetica, sans-serif; font-weight: 300; color: #fff;">One more thing...</h2>
+</section>
+
+<section class="slide shout">
+    <h2 class="shout"><a href="http://pacecraze.com" target="_blank">Pace Craze</a></h2>
+</section>
+
+<section class="slide shout">
+    <h2 class="shout">@igorlukanin<br/><span class="small">on <a href="https://twitter.com/igorlukanin" target="_blank">Twitter</a> & <a href="https://github.com/igorlukanin" target="_blank">Github</a></span></h2>
+</section>
+
+<div class="progress">
+    <div></div>
+</div>
 
 <script src="node_modules/shower-core/shower.min.js"></script>
 
